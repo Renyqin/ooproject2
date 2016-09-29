@@ -1,6 +1,6 @@
 /* SWEN20003 Object Oriented Software Development
  * RPG Game Engine
- * Author: <Chenqin Zhang> <chenqinz>
+ * Author: <Your name> <Your login>
  */
 
 import org.newdawn.slick.SlickException;
@@ -15,83 +15,70 @@ public class Camera
     
     /** The width and height of the screen */
     /** Screen width, in pixels. */
-    public final int screenwidth;
+    private int screenwidth;
     /** Screen height, in pixels. */
-    public final int screenheight;
+    private int screenheight;
 
-    
     /** The camera's position in the world, in x and y coordinates. */
     private int xPos;
     private int yPos;
 
-    
-    public int getxPos() {	
-    	xPos=unitFollow.getxPos();
-    	return xPos;
-    	
-    }
-
-    public int getyPos() {
-    	yPos=unitFollow.getyPos();
-    	return yPos;
-    }
-
-    
-    /** Create a new Camera object. */
+    /** Create a new Camera object.
+     * 
+     * @param player The player to follow
+     * @param screenwidth The width of the viewport in pixels
+     * @param screenheight The height of the viewport in pixels
+     */
     public Camera(Player player, int screenwidth, int screenheight)
     {   
-    	this.screenwidth=screenwidth;
-    	this.screenheight=screenheight;
-    	this.unitFollow=player;
-    	
+        this.unitFollow = player;
+        this.screenwidth = screenwidth;
+        this.screenheight = screenheight;
     }
 
-    /** Update the game camera to recentre it's viewpoint around the player 
+    /** Update the game camera to re-centre its viewpoint around the player 
      */
     public void update()
     throws SlickException
-    {	
-    	xPos=unitFollow.getxPos();
-    	yPos=unitFollow.getyPos();
-    	
+    {
+           // Update the camera based on the player's position
+        xPos = (int) unitFollow.getX() - (screenwidth/2);
+        yPos = (int) unitFollow.getY() - (screenheight/2); 
     }
-    
+        
     /** Returns the minimum x value on screen 
      */
     public int getMinX(){
-
-    	return -screenwidth/2;
+        return xPos;
     }
     
     /** Returns the maximum x value on screen 
      */
     public int getMaxX(){
-    	
-    	//96*72 is the maximum width of map in pixel
-    	return 96*72-screenwidth/2; 
+        return xPos + screenwidth;
     }
     
     /** Returns the minimum y value on screen 
      */
     public int getMinY(){
-
-    	return -screenheight/2;	
+        return yPos;
     }
     
     /** Returns the maximum y value on screen 
      */
     public int getMaxY(){
-    	
-    	//96*72 is the maximum height of map in pixel
-    	return 96*72-screenheight/2; 
+        return yPos+screenheight;
     }
 
-    /** Tells the camera to follow a given unit. 
+    /** Tells the camera to follow a given unit.
+     * 
+     * @param unit The new unit to follow
      */
-    public void followUnit(Player unit)
-    throws SlickException
+    public void followUnit(Object unit)
     {
-    	this.unitFollow=unit;
+        if(unit instanceof Player){
+            unitFollow = (Player) unit;
+        }
     }
     
 }
