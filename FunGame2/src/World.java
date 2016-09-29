@@ -1,9 +1,7 @@
 /* 433-294 Object Oriented Software Development
  * RPG Game Engine
- * Sample Solution
- * Author: Matt Giuca <mgiuca>
+ * Author: <Your name> <Your login>
  */
-
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -16,45 +14,27 @@ import org.newdawn.slick.tiled.TiledMap;
  */
 public class World
 {
-    private static final int PLAYER_START_X = 756, PLAYER_START_Y = 684;
-    
-    private Player player = null;
-    private TiledMap map = null;
-    private Camera camera = null;
-    private Image panel;
-
-    /** Map width, in pixels. */
-    private int getMapWidth()
-    {
-        return map.getWidth() * getTileWidth();
-    }
-
-    /** Map height, in pixels. */
-    private int getMapHeight()
-    {
-        return map.getHeight() * getTileHeight();
-    }
-
-    /** Tile width, in pixels. */
-    private int getTileWidth()
-    {
-        return map.getTileWidth();
-    }
-
-    /** Tile height, in pixels. */
-    private int getTileHeight()
-    {
-        return map.getTileHeight();
-    }
-
     /** Create a new World object. */
+	TiledMap TiledMap;
+	
+	private Player player1;
+	private Camera move;
+	private Image Player;
+	private final int halfw=RPG.screenwidth/2,halfh=RPG.screenheight/2;
+	private int xPos,yPos;
+	static final int tile=72; 
+	private Image panel;
+	
     public World()
     throws SlickException
     {
-        map = new TiledMap(RPG.ASSETS_PATH + "/map.tmx", RPG.ASSETS_PATH);
-        player = new Player(RPG.ASSETS_PATH + "/units/player.png", PLAYER_START_X, PLAYER_START_Y);
-        camera = new Camera(player, RPG.screenwidth, RPG.screenheight);
-        panel= new Image("assets/panel.png");
+    	TiledMap=new TiledMap("assets/map.tmx","assets");
+    	player1=new Player(Player, 100, 26, 600, 100, 756/2, 684/2);
+    	move=new Camera(player1,RPG.screenwidth,RPG.screenheight);
+    	xPos=move.getxPos();
+    	yPos=move.getyPos();
+    	panel=new Image("assets/panel.png");
+      
     }
 
     /** Update the game state for a frame.
@@ -62,12 +42,60 @@ public class World
      * @param dir_y The player's movement in the y axis (-1, 0 or 1).
      * @param delta Time passed since last frame (milliseconds).
      */
-    public void update(int dir_x, int dir_y, int delta)
+    public void update(double dir_x, double dir_y, int delta)
     throws SlickException
     {
-        player.move(this, dir_x, dir_y, delta);
-        camera.update();
+    	
+    	/*xpos and ypos are the coordinate of map, but in the
+    	 *left-top corner of screen,plposx and plposy for match
+    	 *the coordinate of the position where player standing.
+    	 *cause player will drawcenterd, feeler for match the 
+    	 *feet of the player standing, making it looks more natural
+    	*/
+    	final int feeler=18;
+    	int plposx=xPos+halfw; 
+    	int plposy=yPos+halfh+feeler; 
+    	
+    	int i;
+    	int check;
+    	
+    	/*the feelers in direct arrays are using for check block tiles
+    	 *around the player,direct1 for left,right, direct2 for up,down */
+    	int[] direct1={plposx,plposx,plposx-feeler,plposx+feeler};
+    	int[] direct2={plposy+feeler,plposy-feeler,plposy,plposy};
+    	
+    	/*chckTiles[]: up:0, down:1, left:2, right:3*/
+    	int checkTiles[]=new int[4];
+    		
+    	for (i=0;i<4;i++){
+    		if (direct1[i]-halfw+feeler<=move.getMaxX()&&
+    				direct2[i]-halfh+feeler<=move.getMaxY()){
+	    		check=TiledMap.getTileId(direct1[i]/tile,direct2[i]/tile,0);
+	    		checkTiles[i]=Integer.parseInt(TiledMap.getTileProperty(check,
+	    				"block", "0"));
+	    	}
+    	}
+    	
+    	/*the if statements restrict player walk out the edges of
+    	 *map and walk to the block tiles*/	
+    	xPos+=dir_x*delta;
+       	if(xPos>move.getMaxX()-tile/2||xPos<move.getMinX()||
+       			(checkTiles[2]==1&&dir_x==-1)||(checkTiles[3]==1&&dir_x==1)){
+       		xPos-=dir_x*delta;
+       		
+       	}
+   	
+   		yPos+=dir_y*delta;
+   		if(yPos>move.getMaxY()-tile/2||yPos<move.getMinY()||
+   				(checkTiles[0]==1&&dir_y==1)||(checkTiles[1]==1&&dir_y==-1)){
+       		yPos-=dir_y*delta;
+   		}
+   		
+   		/*save the coordinate for player1 in world map*/
+   		player1.setyPos(yPos);
+   		player1.setxPos(xPos);
     }
+
 
     /** Render the entire screen, so it reflects the current game state.
      * @param g The Slick graphics object, used for drawing.
@@ -75,43 +103,17 @@ public class World
     public void render(Graphics g)
     throws SlickException
     {
-        // Render the relevant section of the map
-        int x = -(camera.getMinX() % getTileWidth());
-        int y = -(camera.getMinY() % getTileHeight());
-        int sx = camera.getMinX() / getTileWidth();
-        int sy = camera.getMinY()/ getTileHeight();
-        int w = (camera.getMaxX() / getTileWidth()) - (camera.getMinX() / getTileWidth()) + 1;
-        int h = (camera.getMaxY() / getTileHeight()) - (camera.getMinY() / getTileHeight()) + 1;
-        map.render(x, y, sx, sy, w, h);
-        
-        // Translate the Graphics object
-        g.translate(-camera.getMinX(), -camera.getMinY());
 
-        // Render the player
-        player.render();
-        renderPanel(g);
-        
+    	TiledMap.render(-player1.getxPos()%tile,-player1.getyPos()%tile,
+    			player1.getxPos()/tile,player1.getyPos()/tile,13,10);
+    	
+    	/*player always display in the center of the screen*/
+    	player1.player.drawCentered(halfw,halfh);
+    	renderPanel(g);
+    	
     }
-
-    /** Determines whether a particular map coordinate blocks movement.
-     * @param x Map x coordinate (in pixels).
-     * @param y Map y coordinate (in pixels).
-     * @return true if the coordinate blocks movement.
-     */
-    public boolean terrainBlocks(double x, double y)
-    {
-        // Check we are within the bounds of the map
-        if (x < 0 || y < 0 || x > getMapWidth() || y > getMapHeight()) {
-            return true;
-        }
-        
-        // Check the tile properties
-        int tile_x = (int) x / getTileWidth();
-        int tile_y = (int) y / getTileHeight();
-        int tileid = map.getTileId(tile_x, tile_y, 0);
-        String block = map.getTileProperty(tileid, "block", "0");
-        return !block.equals("0");
-    }
+    
+    
     
     /** Renders the player's status panel.
      * @param g The current Slick graphics context.
@@ -142,13 +144,13 @@ public class World
         text_y = RPG.screenheight - RPG.panelheight + 25;
         g.setColor(LABEL);
         g.drawString("Health:", text_x, text_y);
-        text = "??/??";                                 // TODO: HP / Max-HP
+        text = Integer.toString(player1.getHp())+"/"+Integer.toString(player1.getMaxHp());                                 // TODO: HP / Max-HP
 
         bar_x = 90;
         bar_y = RPG.screenheight - RPG.panelheight + 20;
         bar_width = 90;
         bar_height = 30;
-        health_percent = 0.75f;                         // TODO: HP / Max-HP
+        health_percent = player1.getHp()/player1.getMaxHp();                         // TODO: HP / Max-HP
         hp_bar_width = (int) (bar_width * health_percent);
         text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         g.setColor(BAR_BG);
@@ -163,14 +165,14 @@ public class World
         g.setColor(LABEL);
         g.drawString("Damage:", text_x, text_y);
         text_x += 80;
-        text = "??";                                    // TODO: Damage
+        text = Integer.toString(player1.getMaxDamage());                                    // TODO: Damage
         g.setColor(VALUE);
         g.drawString(text, text_x, text_y);
         text_x += 40;
         g.setColor(LABEL);
         g.drawString("Rate:", text_x, text_y);
         text_x += 55;
-        text = "??";                                    // TODO: Cooldown
+        text = Integer.toString(player1.getRate());                                    // TODO: Cooldown
         g.setColor(VALUE);
         g.drawString(text, text_x, text_y);
 
@@ -193,5 +195,6 @@ public class World
             inv_x += 72;
         }
     }
+
 
 }
