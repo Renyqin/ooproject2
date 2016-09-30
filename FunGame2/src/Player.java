@@ -3,39 +3,86 @@ import org.newdawn.slick.SlickException;
 
 public class Player extends Unit {
 	Image player;
-	private int xPos=756/2; //the starting point of player in world map
-	private int yPos=684/2;
+	private static int MaxHp=100, MaxDamage=26, rate=600, Hp=100;
+	private int xPos=756/2, yPos=684/2;
 	
 	
 	
 
-    Player(Image player, int MaxHp, int MaxDamage, int rate, int Hp, int xPos, int yPos)
+    public Player(Image player)
     throws SlickException
     {
-    	super(MaxHp, MaxDamage, rate, Hp, xPos, yPos);
+    	
+    	super(MaxHp,MaxDamage,rate,Hp);
     	this.player=new Image("assets/units/player.png");
+
     }
 
 
-	public int getxPos() {
-		return xPos;
+
+
+	public static void setMaxHp(int maxHp) {
+		MaxHp = maxHp;
 	}
 
 
-	public int getyPos() {
-		return yPos;
+
+
+	public static void setMaxDamage(int maxDamage) {
+		MaxDamage = maxDamage;
 	}
 
 
+
+
+	public static void setRate(int rate) {
+		Player.rate = rate;
+	}
+
+
+
+
+	public static void setHp(int hp) {
+		Hp = hp;
+	}
+
+
+
+	@Override
 	public void setxPos(int xPos) {
 		this.xPos = xPos;
 	}
 
 
+
+	@Override
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
 
+
+
+	@Override
+	public int getxPos() {
+		return xPos;
+	}
+
+
+
+	@Override
+	public int getyPos() {
+		return yPos;
+	}
+	
+	
+
+
+
+
+
+    
+
+    
 	
 	
     

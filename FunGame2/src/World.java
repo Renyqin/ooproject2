@@ -24,15 +24,41 @@ public class World
 	private int xPos,yPos;
 	static final int tile=72; 
 	private Image panel;
+	static final double SPEED=0.7;
+	
+    /** Map width, in pixels. */
+    private int getMapWidth()
+    {
+        return TiledMap.getWidth() * getTileWidth();
+    }
+
+    /** Map height, in pixels. */
+    private int getMapHeight()
+    {
+        return TiledMap.getHeight() * getTileHeight();
+    }
+
+    /** Tile width, in pixels. */
+    private int getTileWidth()
+    {
+        return TiledMap.getTileWidth();
+    }
+
+    /** Tile height, in pixels. */
+    private int getTileHeight()
+    {
+        return TiledMap.getTileHeight();
+    }
+
 	
     public World()
     throws SlickException
     {
     	TiledMap=new TiledMap("assets/map.tmx","assets");
-    	player1=new Player(Player, 100, 26, 600, 100, 756/2, 684/2);
+    	player1=new Player(Player);
     	move=new Camera(player1,RPG.screenwidth,RPG.screenheight);
-    	xPos=move.getxPos();
-    	yPos=move.getyPos();
+    	xPos=player1.getxPos();
+    	yPos=player1.getyPos();
     	panel=new Image("assets/panel.png");
       
     }
@@ -52,45 +78,29 @@ public class World
     	 *cause player will drawcenterd, feeler for match the 
     	 *feet of the player standing, making it looks more natural
     	*/
-    	final int feeler=18;
-    	int plposx=xPos+halfw; 
-    	int plposy=yPos+halfh+feeler; 
     	
     	int i;
     	int check;
+
     	
-    	/*the feelers in direct arrays are using for check block tiles
-    	 *around the player,direct1 for left,right, direct2 for up,down */
-    	int[] direct1={plposx,plposx,plposx-feeler,plposx+feeler};
-    	int[] direct2={plposy+feeler,plposy-feeler,plposy,plposy};
+    	double new_x=xPos+dir_x*delta*SPEED;
+    	double new_y=yPos+dir_y*delta*SPEED;
+
+
+    	double x_sign = Math.signum(dir_x);
     	
-    	/*chckTiles[]: up:0, down:1, left:2, right:3*/
-    	int checkTiles[]=new int[4];
-    		
-    	for (i=0;i<4;i++){
-    		if (direct1[i]-halfw+feeler<=move.getMaxX()&&
-    				direct2[i]-halfh+feeler<=move.getMaxY()){
-	    		check=TiledMap.getTileId(direct1[i]/tile,direct2[i]/tile,0);
-	    		checkTiles[i]=Integer.parseInt(TiledMap.getTileProperty(check,
-	    				"block", "0"));
-	    	}
-    	}
+    	if(!terrainBlocks(new_x+halfw + x_sign * tile / 4, yPos+halfh + tile / 4) 
+                && !terrainBlocks(new_x+halfw + x_sign * tile / 4, yPos+halfh - tile / 4)) {
+            xPos = (int)new_x;
+        }
     	
-    	/*the if statements restrict player walk out the edges of
-    	 *map and walk to the block tiles*/	
-    	xPos+=dir_x*delta;
-       	if(xPos>move.getMaxX()-tile/2||xPos<move.getMinX()||
-       			(checkTiles[2]==1&&dir_x==-1)||(checkTiles[3]==1&&dir_x==1)){
-       		xPos-=dir_x*delta;
-       		
-       	}
-   	
-   		yPos+=dir_y*delta;
-   		if(yPos>move.getMaxY()-tile/2||yPos<move.getMinY()||
-   				(checkTiles[0]==1&&dir_y==1)||(checkTiles[1]==1&&dir_y==-1)){
-       		yPos-=dir_y*delta;
-   		}
-   		
+    	double y_sign = Math.signum(dir_y);
+        if(!terrainBlocks(xPos+halfw + tile / 4, new_y+halfh + y_sign * tile / 4) 
+                && !terrainBlocks(xPos+halfw - tile / 4, new_y+halfh + y_sign * tile / 4)){
+            yPos = (int)new_y;
+        }
+    	
+    	
    		/*save the coordinate for player1 in world map*/
    		player1.setyPos(yPos);
    		player1.setxPos(xPos);
@@ -112,6 +122,24 @@ public class World
     	renderPanel(g);
     	
     }
+    
+    
+    
+    public boolean terrainBlocks(double x, double y)
+    {
+        // Check we are within the bounds of the map
+        if (x < 0 || y < 0 || x > getMapWidth() || y > getMapHeight()) {
+            return true;
+        }
+        
+        // Check the tile properties
+        int tile_x = (int) x / getTileWidth();
+        int tile_y = (int) y / getTileHeight();
+        int tileid = TiledMap.getTileId(tile_x, tile_y, 0);
+        String block = TiledMap.getTileProperty(tileid, "block", "0");
+        return !block.equals("0");
+    }
+
     
     
     

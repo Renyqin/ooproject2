@@ -8,7 +8,7 @@ public class Unit {
 	private int yPos;
 	private int Hp;
 	
-	Unit(int MaxHp, int MaxDamage, int rate, int Hp, int xPos, int yPos){
+	public Unit(int MaxHp, int MaxDamage, int rate, int Hp, int xPos, int yPos){
 		this.MaxHp=MaxHp;
 		this.MaxDamage=MaxDamage;
 		this.rate=rate;
@@ -18,6 +18,12 @@ public class Unit {
 		this.yPos=yPos;
 		
 	};
+	Unit(int MaxHp, int MaxDamage, int rate, int Hp){
+		this.MaxHp=MaxHp;
+		this.MaxDamage=MaxDamage;
+		this.rate=rate;
+		this.Hp=Hp;
+	}
 	
 	Unit(int xPos, int yPos){
 		this.xPos=xPos;
@@ -49,6 +55,15 @@ public class Unit {
 	}
 	public int getHp() {
 		return Hp;
+	}
+	
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+
+
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
 	}
 	
 
