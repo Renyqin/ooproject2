@@ -42,7 +42,7 @@ public class Player extends Unit {
 
 
 
-	public void setHp(int hp) {
+	public static void setHp(int hp) {
 		Hp = hp;
 	}
 

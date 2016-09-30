@@ -1,0 +1,22 @@
+
+public class Villager extends Unit {
+	private int xPos;
+	private int yPos;
+	
+	Villager(int xPos, int yPos){
+		super(xPos, yPos);
+	}
+
+
+
+	public int getxPos() {
+		return xPos;
+	}
+
+	public int getyPos() {
+		return yPos;
+	}
+	
+	
+	
+}

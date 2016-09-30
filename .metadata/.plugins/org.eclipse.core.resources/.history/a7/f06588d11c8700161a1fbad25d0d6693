@@ -124,7 +124,7 @@ public class World
     	renderPanel(g);
     	
     	g.translate(xPos, yPos);
-    	amulet.renderAmulet(player1,g);
+    	amulet.renderAmulet(player1);
     	
     	
     }

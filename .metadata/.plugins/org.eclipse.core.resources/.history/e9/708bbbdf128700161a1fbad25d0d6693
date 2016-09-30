@@ -1,5 +1,7 @@
 
 public class Villager extends Unit {
+	private int xPos;
+	private int yPos;
 	
 	Villager(int xPos, int yPos){
 		super(xPos, yPos);

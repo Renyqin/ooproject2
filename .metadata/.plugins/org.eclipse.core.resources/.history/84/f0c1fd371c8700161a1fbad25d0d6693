@@ -121,11 +121,8 @@ public class World
     	
     	/*player always display in the center of the screen*/
     	player1.player.drawCentered(halfw,halfh);
+    	amulet.renderAmulet(player1);
     	renderPanel(g);
-    	
-    	g.translate(xPos, yPos);
-    	amulet.renderAmulet(player1,g);
-    	
     	
     }
     

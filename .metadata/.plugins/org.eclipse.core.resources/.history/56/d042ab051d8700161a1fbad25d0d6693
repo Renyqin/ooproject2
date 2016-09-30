@@ -123,7 +123,7 @@ public class World
     	player1.player.drawCentered(halfw,halfh);
     	renderPanel(g);
     	
-    	g.translate(xPos, yPos);
+    	//g.translate(amulet.getxPos(), amulet.getyPos());
     	amulet.renderAmulet(player1,g);
     	
     	

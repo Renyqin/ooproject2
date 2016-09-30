@@ -1,0 +1,11 @@
+
+public class Item {
+	private int xPos, yPos;
+	Item(int xPos, int yPos){
+		this.xPos=xPos;
+		this.yPos=yPos;
+		
+	}
+}
+
+

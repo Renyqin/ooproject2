@@ -24,7 +24,7 @@ public class World
 	private int xPos,yPos;
 	static final int tile=72; 
 	private Image panel;
-	private Amulet amulet=null;
+	private Item amulet;
 	static final double SPEED=0.7;
 	
     /** Map width, in pixels. */
@@ -61,7 +61,6 @@ public class World
     	xPos=player1.getxPos();
     	yPos=player1.getyPos();
     	panel=new Image("assets/panel.png");
-    	amulet=new Amulet();
       
     }
 
@@ -85,8 +84,6 @@ public class World
     	
     	double new_x=xPos+dir_x*delta*SPEED;
     	double new_y=yPos+dir_y*delta*SPEED;
-    	
-    	System.out.println("x:"+xPos+" y:"+yPos);
 
 
     	double x_sign = Math.signum(dir_x);
@@ -121,11 +118,8 @@ public class World
     	
     	/*player always display in the center of the screen*/
     	player1.player.drawCentered(halfw,halfh);
+    	amulet.renderAmulet(player1);
     	renderPanel(g);
-    	
-    	g.translate(xPos, yPos);
-    	amulet.renderAmulet(player1,g);
-    	
     	
     }
     

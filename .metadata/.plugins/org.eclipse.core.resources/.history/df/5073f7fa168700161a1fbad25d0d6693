@@ -1,0 +1,7 @@
+
+public class Amulet extends Item{
+	private final static int xPos=965, yPos=3563;
+	public Amulet(){
+		super(xPos,yPos);
+	}
+}

@@ -21,28 +21,28 @@ public class Player extends Unit {
 
 
 
-	public void setMaxHp(int maxHp) {
+	public static void setMaxHp(int maxHp) {
 		MaxHp = maxHp;
 	}
 
 
 
 
-	public void setMaxDamage(int maxDamage) {
+	public static void setMaxDamage(int maxDamage) {
 		MaxDamage = maxDamage;
 	}
 
 
 
 
-	public void setRate(int rate) {
+	public static void setRate(int rate) {
 		Player.rate = rate;
 	}
 
 
 
 
-	public void setHp(int hp) {
+	public static void setHp(int hp) {
 		Hp = hp;
 	}
 
