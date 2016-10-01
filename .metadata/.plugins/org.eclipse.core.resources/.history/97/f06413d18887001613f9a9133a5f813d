@@ -1,0 +1,91 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class Player extends Unit {
+	Image player;
+	private static int MaxHp=100, MaxDamage=26, rate=600, Hp=100;
+	private int xPos=756/2, yPos=684/2;
+	
+	
+	
+
+    public Player(Image player)
+    throws SlickException
+    {
+    	
+    	super(MaxHp,MaxDamage,rate,Hp);
+    	this.player=new Image("assets/units/player.png");
+
+    }
+
+
+
+
+	public void setMaxHp(int maxHp) {
+		MaxHp = maxHp;
+	}
+
+
+
+
+	public void setMaxDamage(int maxDamage) {
+		MaxDamage = maxDamage;
+	}
+
+
+
+
+	public void setRate(int rate) {
+		Player.rate = rate;
+	}
+
+
+
+
+	public void setHp(int hp) {
+		Hp = hp;
+	}
+
+
+
+	@Override
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+
+
+
+	@Override
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
+	}
+
+
+
+	@Override
+	public int getxPos() {
+		return xPos;
+	}
+
+
+
+	@Override
+	public int getyPos() {
+		return yPos;
+	}
+	
+	
+
+
+
+
+
+    
+
+    
+	
+	
+    
+    
+
+}

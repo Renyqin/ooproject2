@@ -1,0 +1,14 @@
+import org.newdawn.slick.SlickException;
+
+public class Elixir extends Item {
+	private final static int xPos=700, yPos=700;
+	private final static  String path="assets/items/elixir.png";
+	private final static int damageImprove=180;
+	boolean pickup=false;
+	
+	public Elixir()
+	throws SlickException
+	{
+		super(xPos,yPos,path);
+	}
+}

@@ -1,9 +1,22 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
-public class Item {
+public abstract class Item {
 	private int xPos, yPos;
-	public Item(int xPos, int yPos){
+	private static int distance=50;
+	private String ImagePath;
+	private Image ItemImage;
+	private boolean pickup=false;
+	
+	public Item(int xPos, int yPos, String ImagePath)
+	throws SlickException
+	{
+		this.ImagePath=ImagePath;
 		this.xPos=xPos;
 		this.yPos=yPos;
+		
+		ItemImage=new Image(ImagePath);
+		
 		
 	}
 	public int getxPos() {
@@ -13,6 +26,36 @@ public class Item {
 		return yPos;
 	}
 	
+	public boolean isPickup() {
+		return pickup;
+	}
+	public void setPickup(boolean pickup) {
+		this.pickup = pickup;
+	}
+	public static int getDistance() {
+		return distance;
+	}
+	/**from solution of workshop4*/
+	private double sqr(double x){
+		return x*x;
+	}
+	
+	public boolean distanceOK(double x1, double y1, double x2, double y2){
+			if ((double)Math.sqrt(sqr(x2-x1)+sqr(y2-y1))<distance){
+				return true;
+			}else{
+				return false;
+			}
+	}
+	
+	
+	public void render(){
+		ItemImage.drawCentered(xPos, yPos);
+		
+	}
+	
+	
+	public abstract void PickUp(Player player);
 }
 
 

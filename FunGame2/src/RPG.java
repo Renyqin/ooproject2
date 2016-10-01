@@ -15,14 +15,16 @@ import org.newdawn.slick.SlickException;
  */
 public class RPG extends BasicGame
 {
-    private World world;
-
+    /** Location of the "assets" directory. */
+    public static final String ASSETS_PATH = "assets";
     /** Screen width, in pixels. */
     public static final int screenwidth = 800;
     /** Screen height, in pixels. */
     public static final int screenheight = 600;
-    
+    /**the height of panel, in pixels*/
     public static final int panelheight = 70;
+    /** The world of our game */
+    private World world;
 
     /** Create a new RPG object. */
     public RPG()
@@ -52,8 +54,8 @@ public class RPG extends BasicGame
         Input input = gc.getInput();
 
         // Update the player's movement direction based on keyboard presses.
-        double dir_x = 0;
-        double dir_y = 0;
+        int dir_x = 0;
+        int dir_y = 0;
         if (input.isKeyDown(Input.KEY_DOWN))
             dir_y += 1;
         if (input.isKeyDown(Input.KEY_UP))
@@ -62,7 +64,7 @@ public class RPG extends BasicGame
             dir_x -= 1;
         if (input.isKeyDown(Input.KEY_RIGHT))
             dir_x += 1;
-
+        
         // Let World.update decide what to do with this data.
         world.update(dir_x, dir_y, delta);
     }

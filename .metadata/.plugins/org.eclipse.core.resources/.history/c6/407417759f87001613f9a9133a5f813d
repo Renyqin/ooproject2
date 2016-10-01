@@ -1,0 +1,40 @@
+import org.newdawn.slick.Image;
+
+public class Item {
+	private int xPos, yPos;
+	private static int distance=20;
+	private String ImagePath;
+	private Image ItemImage;
+	
+	public Item(int xPos, int yPos, String ImagePath){
+		this.ImagePath=ImagePath;
+		this.xPos=xPos;
+		this.yPos=yPos;
+		
+	}
+	public int getxPos() {
+		return xPos;
+	}
+	public int getyPos() {
+		return yPos;
+	}
+	
+	public static int getDistance() {
+		return distance;
+	}
+	/**from solution of workshop4*/
+	private double sqr(double x){
+		return x*x;
+	}
+	
+	public double distance(double x1, double y1, double x2, double y2){
+		return (double)Math.sqrt(sqr(x2-x1)+sqr(y2-y1));
+	}
+	
+	public void renderAmulet(Player player){
+		ItemImage.drawCentered(xPos, yPos);
+}
+	
+}
+
+

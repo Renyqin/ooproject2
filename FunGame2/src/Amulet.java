@@ -1,33 +1,26 @@
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Amulet extends Item{
-	private final static int xPos=300, yPos=300;
+	private final static int xPos=500, yPos=500;
+	private final static  String path="assets/items/amulet.png";
 	private final static int HpImprove=80;
-	private Image Amulet;
+	
 	public Amulet()
 	throws SlickException
 	{
-		super(xPos,yPos);
-		Amulet=new Image("assets/items/amulet.png");
+		super(xPos,yPos,path);
+
 	}
 	
-	public boolean improve(Player player){
-		boolean pickup=false;
-		if (player.getxPos()==xPos&&player.getyPos()==yPos){
+	@Override
+	public void PickUp(Player player){
+		
+		if (distanceOK(xPos,yPos,player.getX(),player.getY())){
+			setPickup(true);
 			player.setMaxHp(player.getMaxHp()+HpImprove);
-			pickup=true;
+			player.setHp(player.getMaxHp());
 		}
-		
-		
-		return pickup;
 	}
 	
-	public void renderAmulet(Player player, Graphics g){
-		if (!improve(player)){
-			Amulet.drawCentered(xPos, yPos);
-		}
-	}
 }

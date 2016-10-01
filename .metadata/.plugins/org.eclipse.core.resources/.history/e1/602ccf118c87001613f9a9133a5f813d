@@ -1,0 +1,26 @@
+
+public class Item {
+	private int xPos, yPos;
+	public Item(int xPos, int yPos){
+		this.xPos=xPos;
+		this.yPos=yPos;
+		
+	}
+	public int getxPos() {
+		return xPos;
+	}
+	public int getyPos() {
+		return yPos;
+	}
+	
+	private float sqr(float x){
+		return x*x;
+	}
+	
+	public double distance(double x1, double y1, double x2, double y2){
+		return (double)Math.sqrt(sqr(x2-x1)+sqr(y2-y1));
+	}
+	
+}
+
+

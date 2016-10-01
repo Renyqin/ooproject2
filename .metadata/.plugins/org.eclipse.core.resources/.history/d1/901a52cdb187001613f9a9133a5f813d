@@ -1,0 +1,23 @@
+
+import org.newdawn.slick.SlickException;
+
+public class Amulet extends Item{
+	private final static int xPos=500, yPos=500;
+	private final static  String path="assets/items/amulet.png";
+	private final static int HpImprove=180;
+	
+	public Amulet(Player player)
+	throws SlickException
+	{
+		super(xPos,yPos,path);
+		
+		if (distance(xPos,yPos,player.getX(),player.getY())<Item.getDistance()){
+			setPickup(true);
+			player.setMaxHp(HpImprove);
+			player.setHp(player.getMaxHp());
+			System.out.println(player.getMaxHp());
+		}
+	}
+}
+	
+	

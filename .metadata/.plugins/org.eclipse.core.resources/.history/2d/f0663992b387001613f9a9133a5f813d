@@ -1,0 +1,14 @@
+import org.newdawn.slick.SlickException;
+
+public class Sword extends Item{
+	private final static int xPos=600, yPos=600;
+	private final static  String path="assets/items/sword.png";
+	private final static int damageImprove=180;
+	boolean pickup=false;
+	
+	public Sword()
+	throws SlickException
+	{
+		super(xPos,yPos,path);
+	}
+}
