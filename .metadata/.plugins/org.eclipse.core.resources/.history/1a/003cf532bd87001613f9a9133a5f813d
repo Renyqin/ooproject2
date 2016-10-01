@@ -112,7 +112,6 @@ public class World
 	        	item.render();
         	}
         	if (item.isPickup()){
-        		player.Inventory(item);
         		items.remove(item);
         		break;
         	}
@@ -224,9 +223,7 @@ public class World
         inv_y = RPG.screenheight - RPG.panelheight
             + ((RPG.panelheight - 72) / 2);
         // for (each item in the player's inventory)                // TODO
-        for(Item item:player.getInventory())
         {
-        	item.getItemImage().draw(inv_x,inv_y);
             // Render the item to (inv_x, inv_y)
             inv_x += 72;
         }

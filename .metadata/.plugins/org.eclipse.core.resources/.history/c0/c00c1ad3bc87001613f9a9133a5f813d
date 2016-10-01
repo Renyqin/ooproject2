@@ -115,10 +115,6 @@ public class Player extends Unit
 	
 	
 
-	public ArrayList<Item> getInventory() {
-		return inventory;
-	}
-
 	public int getMaxHp() {
 		return MaxHp;
 	}
@@ -129,10 +125,6 @@ public class Player extends Unit
 
 	public int getRate() {
 		return Rate;
-	}
-	
-	public void Inventory(Item item){
-		inventory.add(item);
 	}
 
 	/** Draw the player to the screen at the correct place.
@@ -148,6 +140,12 @@ public class Player extends Unit
         which_img = this.face_left ? this.img_flipped : this.img;
         which_img.drawCentered((int) x, (int) y);
     }
-
+    
+    public void InventoryRender(World world)
+    {
+    	for (Item item: world.getItems()){
+    		
+    	}
+    }
 }
 

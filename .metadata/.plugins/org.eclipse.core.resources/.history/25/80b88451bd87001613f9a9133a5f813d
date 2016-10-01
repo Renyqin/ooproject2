@@ -115,10 +115,6 @@ public class Player extends Unit
 	
 	
 
-	public ArrayList<Item> getInventory() {
-		return inventory;
-	}
-
 	public int getMaxHp() {
 		return MaxHp;
 	}
@@ -129,10 +125,6 @@ public class Player extends Unit
 
 	public int getRate() {
 		return Rate;
-	}
-	
-	public void Inventory(Item item){
-		inventory.add(item);
 	}
 
 	/** Draw the player to the screen at the correct place.

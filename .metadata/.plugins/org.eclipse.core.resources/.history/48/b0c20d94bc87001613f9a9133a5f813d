@@ -32,12 +32,9 @@ public abstract class Item {
 	public void setPickup(boolean pickup) {
 		this.pickup = pickup;
 	}
-
-	public Image getItemImage() {
-		return ItemImage;
+	public static int getDistance() {
+		return distance;
 	}
-	
-	
 	/**from solution of workshop4*/
 	private double sqr(double x){
 		return x*x;

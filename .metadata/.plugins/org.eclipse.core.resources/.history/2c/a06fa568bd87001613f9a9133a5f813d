@@ -119,6 +119,10 @@ public class Player extends Unit
 		return inventory;
 	}
 
+	public void setInventory(ArrayList<Item> inventory) {
+		this.inventory = inventory;
+	}
+
 	public int getMaxHp() {
 		return MaxHp;
 	}
