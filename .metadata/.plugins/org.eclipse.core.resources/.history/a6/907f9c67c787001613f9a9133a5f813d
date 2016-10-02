@@ -1,0 +1,21 @@
+import org.newdawn.slick.Image;
+
+public class Villager extends Unit {
+	private Image VillagerImage;
+	private static final String ImagePath;
+	
+	Villager(int xPos, int yPos, String ImagePath){
+		super(xPos, yPos);
+	}
+	
+	
+	public void render(){
+		VillagerImage.drawCentered(xPos, yPos);
+		
+	}
+
+
+	
+	
+	
+}

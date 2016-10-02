@@ -1,0 +1,28 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class Villager extends Unit {
+	private Image VillagerImage;
+
+	
+	Villager(int xPos, int yPos, String ImagePath)
+	throws SlickException
+	{
+		super(xPos, yPos);
+		VillagerImage= new Image(ImagePath);
+	}
+	
+	
+	public void render(){
+		VillagerImage.drawCentered(getxPos(), getyPos());
+		
+	}
+	public int tileHight(){
+		return VillagerImage.getHeight();
+	}
+
+
+	
+	
+	
+}

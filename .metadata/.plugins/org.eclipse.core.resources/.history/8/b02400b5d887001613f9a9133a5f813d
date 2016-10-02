@@ -1,0 +1,30 @@
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+
+public class Prince extends Villager {
+	private static final int xPos=467, yPos=679;
+	private static final String ImagePath="assets/units/prince.png";
+	private static final String convst1="The elixir! My father is cured! Thank you!";
+	private boolean find=false;
+	
+	Prince()
+	throws SlickException
+	{
+		super(xPos, yPos, ImagePath);
+	}
+	
+	public void interact(Player player, World world, Graphics g, boolean talk){
+		for (Item item:player.getInventory()){
+			if(item.isGetElixir()){
+				find=true;
+			}
+		}
+		if (distanceOK(player.getX(),player.getY(),xPos,yPos)&&talk){
+			if (find){
+				g.drawString(convst1, xPos, yPos+tileHight());
+			}
+			
+		}
+		
+	}
+}

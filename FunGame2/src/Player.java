@@ -25,6 +25,7 @@ public class Player extends Unit
     // Pixels per millisecond
     private static final double SPEED = 0.7;
     private static int MaxHp=100, MaxDamage=26, Rate=600, Hp=100;
+    private boolean talk;
     private ArrayList<Item> inventory = new ArrayList<Item>();
     
     
@@ -69,7 +70,7 @@ public class Player extends Unit
      * @param dir_y The player's movement in the y axis (-1, 0 or 1).
      * @param delta Time passed since last frame (milliseconds).
      */
-    public void move(World world, double dir_x, double dir_y, double delta)
+    public void move(World world, double dir_x, double dir_y, double delta, boolean talk)
     {
         // Update player facing based on X direction
         if (dir_x > 0)
@@ -77,12 +78,14 @@ public class Player extends Unit
         else if (dir_x < 0)
             this.face_left = true;
 
+        
+        this.talk=talk;
+        
         // Move the player by dir_x, dir_y, as a multiple of delta * speed
         double new_x = this.x + dir_x * delta * SPEED;
         double new_y = this.y + dir_y * delta * SPEED;
         
        
-
 
         // Move in x first
         double x_sign = Math.signum(dir_x);
@@ -98,6 +101,7 @@ public class Player extends Unit
                 && !world.terrainBlocks(this.x - width / 3, new_y + y_sign * height / 3)){
             this.y = new_y;
         }
+        
    
     }
 
@@ -133,6 +137,10 @@ public class Player extends Unit
 	
 	public void Inventory(Item item){
 		inventory.add(item);
+	}
+	
+	public boolean getTalk(){
+		return talk;
 	}
 
 	/** Draw the player to the screen at the correct place.

@@ -15,6 +15,7 @@ public class Elixir extends Item {
 	public void PickUp(Player player) {
 		if (distanceOK(xPos,yPos,player.getX(),player.getY())){
 			setPickup(true);
+			setGetElixir(true);
 		}
 		
 	}

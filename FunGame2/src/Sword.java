@@ -16,6 +16,7 @@ public class Sword extends Item{
 	public void PickUp(Player player) {
 		if (distanceOK(xPos,yPos,player.getX(),player.getY())){
 			setPickup(true);
+			setGetSword(true);
 			player.setMaxDamage(player.getMaxDamage()+damageImprove);
 		}
 		

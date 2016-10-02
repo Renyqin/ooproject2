@@ -17,6 +17,7 @@ public class Tome extends Item {
 		
 		if (distanceOK(xPos,yPos,player.getX(),player.getY())){
 			setPickup(true);
+			setGetTome(true);
 			player.setRate(player.getRate()-rateImprove);
 		}
 		

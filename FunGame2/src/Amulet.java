@@ -20,6 +20,7 @@ public class Amulet extends Item{
 			setPickup(true);
 			player.setMaxHp(player.getMaxHp()+HpImprove);
 			player.setHp(player.getMaxHp());
+			setGetAmulet(true);
 		}
 	}
 	

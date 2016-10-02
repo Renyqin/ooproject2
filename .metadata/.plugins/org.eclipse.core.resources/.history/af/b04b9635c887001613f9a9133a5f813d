@@ -1,0 +1,13 @@
+
+public class Prince extends Villager {
+	private static final int xPos=467, yPos=679;
+	private static final int ImagePath=""
+	
+	Prince(){
+		super(xPos, yPos, ImagePath);
+	}
+	
+	public void interact(Player player, World world, int time){
+		
+	}
+}

@@ -4,14 +4,14 @@ import org.newdawn.slick.SlickException;
 public abstract class Item {
 	private int xPos, yPos;
 	private static int distance=50;
-	private String ImagePath;
+
 	private Image ItemImage;
 	private boolean pickup=false;
+	private boolean getSword=false, getTome=false, getAmulet=false, getElixir=false;
 	
 	public Item(int xPos, int yPos, String ImagePath)
 	throws SlickException
 	{
-		this.ImagePath=ImagePath;
 		this.xPos=xPos;
 		this.yPos=yPos;
 		
@@ -32,12 +32,39 @@ public abstract class Item {
 	public void setPickup(boolean pickup) {
 		this.pickup = pickup;
 	}
+	
 
 	public Image getItemImage() {
 		return ItemImage;
 	}
 	
 	
+	
+	
+	public boolean isGetSword() {
+		return getSword;
+	}
+	public void setGetSword(boolean getSword) {
+		this.getSword = getSword;
+	}
+	public boolean isGetTome() {
+		return getTome;
+	}
+	public void setGetTome(boolean getTome) {
+		this.getTome = getTome;
+	}
+	public boolean isGetAmulet() {
+		return getAmulet;
+	}
+	public void setGetAmulet(boolean getAmulet) {
+		this.getAmulet = getAmulet;
+	}
+	public boolean isGetElixir() {
+		return getElixir;
+	}
+	public void setGetElixir(boolean getElixir) {
+		this.getElixir = getElixir;
+	}
 	/**from solution of workshop4*/
 	private double sqr(double x){
 		return x*x;

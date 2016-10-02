@@ -1,0 +1,33 @@
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public abstract class Villager extends Unit {
+	private Image VillagerImage;
+
+	
+	public Villager(int xPos, int yPos, String ImagePath)
+	throws SlickException
+	{
+		super(xPos, yPos);
+		VillagerImage= new Image(ImagePath);
+	}
+	
+	
+	public void render(){
+		VillagerImage.drawCentered(getxPos(), getyPos());
+		
+	}
+	public int tileHight(){
+		return VillagerImage.getHeight();
+	}
+	
+	public void update(boolean talk){
+		
+	}
+
+	public abstract void interact(Player player, World world, int time, Graphics g);
+	
+	
+	
+}

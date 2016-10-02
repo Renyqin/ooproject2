@@ -25,6 +25,7 @@ public class RPG extends BasicGame
     public static final int panelheight = 70;
     /** The world of our game */
     private World world;
+    private Villager villager;
 
     /** Create a new RPG object. */
     public RPG()
@@ -56,6 +57,8 @@ public class RPG extends BasicGame
         // Update the player's movement direction based on keyboard presses.
         int dir_x = 0;
         int dir_y = 0;
+        boolean talk=false;
+        boolean attack=false;
         if (input.isKeyDown(Input.KEY_DOWN))
             dir_y += 1;
         if (input.isKeyDown(Input.KEY_UP))
@@ -64,9 +67,14 @@ public class RPG extends BasicGame
             dir_x -= 1;
         if (input.isKeyDown(Input.KEY_RIGHT))
             dir_x += 1;
+        if (input.isKeyDown(Input.KEY_T))
+        	talk=true;
+        if (input.isKeyDown(Input.KEY_A))
+        	attack=true;
         
         // Let World.update decide what to do with this data.
-        world.update(dir_x, dir_y, delta);
+        world.update(dir_x, dir_y, delta,talk);
+        
     }
 
     /** Render the entire screen, so it reflects the current game state.

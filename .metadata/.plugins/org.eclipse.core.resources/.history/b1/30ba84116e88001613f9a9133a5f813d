@@ -1,0 +1,35 @@
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+
+public class Farmer extends Villager{
+	private static final int xPos=738, yPos=549;
+	private static final int Hp=1, MaxHp=1;
+	private static final String name="Garth";
+	private static final String ImagePath="assets/units/peasant.png";
+	private static final String convst1="Find the Amulet of Vitality, across the river to the west.";
+	private static final String convst2="Find the Sword of Strength - cross the bridge to the east, then head south.";
+	private static final String convst3="";
+	private static final String convst4="";
+	
+	
+	Farmer()
+	throws SlickException
+	{
+		super(Hp, MaxHp, xPos, yPos, ImagePath,name);
+	}
+
+
+	@Override
+	public void interact(Player player, World world, Graphics g) {
+		for (Item item:player.getInventory()){
+			if (!item.isGetAmulet()){
+				textbox(xPos, yPos, convst1, g);
+			}else if (!item.isGetSword()){
+				textbox(xPos, yPos, convst2, g);
+			}
+		}
+		
+	}
+	
+	
+}

@@ -1,0 +1,17 @@
+import org.newdawn.slick.SlickException;
+
+public class Prince extends Villager {
+	private static final int xPos=467, yPos=679;
+	private static final String ImagePath="assets/units/prince.png";
+	
+	Prince()
+	throws SlickException
+	{
+		super(xPos, yPos, ImagePath);
+	}
+	
+	public void interact(Player player, World world, int time){
+		if (player.getInventory());
+		
+	}
+}

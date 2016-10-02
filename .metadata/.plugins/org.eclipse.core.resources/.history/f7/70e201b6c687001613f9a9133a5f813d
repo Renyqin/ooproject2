@@ -1,0 +1,16 @@
+import org.newdawn.slick.Image;
+
+public class Villager extends Unit {
+	private Image villagerImage;
+	private static final String ImagePath
+	
+	Villager(int xPos, int yPos, String ImagePath){
+		super(xPos, yPos);
+	}
+
+
+
+	
+	
+	
+}
