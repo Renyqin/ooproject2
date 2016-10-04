@@ -5,23 +5,44 @@ import org.newdawn.slick.SlickException;
 
 public abstract class Villager extends Unit {
 	private Image VillagerImage;
+	private int timer=4000;
+	private int dialogueTime=4000;
+	private int distance=50;
 
 	
-	public Villager(int Hp, int MaxHp,int xPos, int yPos, String ImagePath,String name)
+	public Villager(int MaxHp,int xPos, int yPos, String ImagePath,String name)
 	throws SlickException
 	{
-		super(Hp, MaxHp,xPos, yPos, name);
+		super(MaxHp,xPos, yPos, name);
 		VillagerImage= new Image(ImagePath);
 	}
 	
 	
 	public void render(Graphics g){
-		VillagerImage.drawCentered(getxPos(), getyPos());
-		HealthBar(g, getxPos(), getyPos(), getName());
+		VillagerImage.drawCentered((int)getxPos(), (int)getyPos());
+		HealthBar(g, (int)getxPos(), (int)getyPos(), getName());
 		
 	}
 	public int tileHeight(){
 		return VillagerImage.getHeight();
+	}
+	
+	public void DialogueTime(int delta){
+		timer+=delta;
+		
+	}
+	
+	public boolean talk(Player player){
+		if (distanceOK(player.getX(),player.getY(),
+    			getxPos(),getyPos())&&player.getTalk()){
+			timer=0;
+			return true;
+		}
+		if (timer<dialogueTime){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void textbox(int xPos, int yPos, String text, Graphics g){

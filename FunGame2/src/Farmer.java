@@ -3,7 +3,7 @@ import org.newdawn.slick.SlickException;
 
 public class Farmer extends Villager{
 	private static final int xPos=756, yPos=870;
-	private static final int Hp=1, MaxHp=1;
+	private static final int MaxHp=1;
 	private static final String name="Garth";
 	private static final String ImagePath="assets/units/peasant.png";
 	private static final String convst1="Find the Amulet of Vitality, across the river to the west.";
@@ -19,34 +19,36 @@ public class Farmer extends Villager{
 	Farmer()
 	throws SlickException
 	{
-		super(Hp, MaxHp, xPos, yPos, ImagePath,name);
+		super(MaxHp, xPos, yPos, ImagePath,name);
 	}
 
 
 	@Override
 	public void interact(Player player, World world, Graphics g) {
-		for (Item item:player.getInventory()){
-			if (item.isGetAmulet()){
-				amulet=true;
-		
-			}else if (item.isGetSword()){
-				sword=true;
-				
+		if (talk(player)){
+			for (Item item:player.getInventory()){
+				if (item.isGetAmulet()){
+					amulet=true;
 			
-			}else if (item.isGetTome()){
-				tome=true;
+				}else if (item.isGetSword()){
+					sword=true;
+					
+				
+				}else if (item.isGetTome()){
+					tome=true;
+				}
 			}
+			if (!amulet){
+				textbox(xPos, yPos, convst1, g);
+			}else if (!sword){
+				textbox(xPos, yPos, convst2, g);
+			}else if (!tome){
+				textbox(xPos, yPos, convst3, g);
+			}else{
+				textbox(xPos, yPos, convst4, g);
+			}
+			
 		}
-		if (!amulet){
-			textbox(xPos, yPos, convst1, g);
-		}else if (!sword){
-			textbox(xPos, yPos, convst2, g);
-		}else if (!tome){
-			textbox(xPos, yPos, convst3, g);
-		}else{
-			textbox(xPos, yPos, convst4, g);
-		}
-		
 	}
 	
 	

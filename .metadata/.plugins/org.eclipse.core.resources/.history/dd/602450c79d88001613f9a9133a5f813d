@@ -1,0 +1,19 @@
+import org.newdawn.slick.Image;
+
+public class Monster extends Unit{
+	Image monsterImage;
+	
+	public Monster(int MaxHp, int MaxDamage, int rate, int Hp, 
+			String name, int xPos, int yPos, Image monsterImage) {
+		super(MaxHp, MaxDamage, rate, Hp, name, xPos, yPos);
+		this.monsterImage=monsterImage;
+	}
+
+
+	public void render(){
+		monsterImage.drawCentered(getxPos(), getyPos());
+		
+	}
+	
+
+}

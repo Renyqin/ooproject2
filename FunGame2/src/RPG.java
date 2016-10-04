@@ -25,7 +25,6 @@ public class RPG extends BasicGame
     public static final int panelheight = 70;
     /** The world of our game */
     private World world;
-    private Villager villager;
 
     /** Create a new RPG object. */
     public RPG()
@@ -73,7 +72,7 @@ public class RPG extends BasicGame
         	attack=true;
         
         // Let World.update decide what to do with this data.
-        world.update(dir_x, dir_y, delta,talk);
+        world.update(dir_x, dir_y, delta,talk,attack);
         
     }
 

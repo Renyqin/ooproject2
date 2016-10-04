@@ -1,0 +1,11 @@
+import org.newdawn.slick.Image;
+
+public class PassiveMonster extends Monster{
+
+	public PassiveMonster(int MaxHp, int MaxDamage, int rate, int Hp, String name, int xPos, int yPos,
+			Image monsterImage) {
+		super(MaxHp, MaxDamage, rate, Hp, name, xPos, yPos, monsterImage);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,64 @@
+import java.util.Random;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class Monster extends Unit{
+	private Image MonsterImage;
+	private String type;
+	private static final double PSPEED=0.2;
+	private int timer =0;
+	private int waitTime=3000;
+
+	
+	public Monster(int MaxHp, int MaxDamage, int rate,String name, 
+			int xPos, int yPos, String ImagePath, String type) 
+	throws SlickException 
+	{
+		super(MaxHp, MaxDamage, rate, name, xPos, yPos);
+		MonsterImage=new Image(ImagePath);
+		this.type=type;
+	}
+
+
+
+
+	public String getType() {
+		return type;
+	}
+	
+	public void render(){
+		MonsterImage.drawCentered((int)getxPos(), (int)getyPos());
+		
+	}
+	
+	public void wander(double delta, World world){
+		Random randomx=new Random();
+		Random randomy=new Random();
+		int randomX=(randomx.nextInt(3)-1);
+		int randomY=(randomy.nextInt(3)-1);
+		int x;
+		int y;
+		
+		timer+=delta;
+		
+		if (timer>waitTime){
+			timer=0;
+			x=randomX;
+			y=randomY;
+		}
+			
+			if (!world.terrainBlocks(getxPos()+x*delta*PSPEED, getyPos()+y*delta*PSPEED)){
+				
+				setxPos(getxPos()+x*delta*PSPEED);
+				setyPos(getyPos()+y*delta*PSPEED);
+				System.out.println("randomx:"+randomX+"  randomy:"+randomY);
+			}
+		}
+		
+	
+	
+	
+	
+
+}

@@ -1,0 +1,11 @@
+import org.newdawn.slick.SlickException;
+
+public class GiantBat extends Monster {
+
+	public GiantBat(int MaxHp, int MaxDamage, int rate, String name, int xPos, int yPos, String ImagePath,
+			String type) throws SlickException {
+		super(MaxHp, MaxDamage, rate, Hp, name, xPos, yPos, ImagePath, type);
+		// TODO Auto-generated constructor stub
+	}
+
+}

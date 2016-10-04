@@ -1,0 +1,32 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class Monster extends Unit{
+	private Image MonsterImage;
+	private String type;
+	
+	public Monster(int MaxHp, int MaxDamage, int rate,String name, 
+			int xPos, int yPos, String ImagePath, String type) 
+	throws SlickException 
+	{
+		super(MaxHp, MaxDamage, rate, name, xPos, yPos);
+		MonsterImage=new Image(ImagePath);
+		this.type=type;
+	}
+
+
+
+
+	public String getType() {
+		return type;
+	}
+	
+	public void render(){
+		MonsterImage.drawCentered(getxPos(), getyPos());
+		
+	}
+	
+	
+	
+
+}

@@ -25,6 +25,7 @@ public class World
     private Image panel;
     private ArrayList<Item> items = new ArrayList<Item>();
     private ArrayList<Villager> villagers = new ArrayList<Villager>();
+    private ArrayList<Monster> monsters = new ArrayList<Monster>();
     
 
     /** Map width, in pixels. */
@@ -50,8 +51,13 @@ public class World
     {
         return map.getTileHeight();
     }
+    
 
-    /** Create a new World object. */
+    public ArrayList<Monster> getMonsters() {
+		return monsters;
+	}
+
+	/** Create a new World object. */
     public World()
     throws SlickException
     {
@@ -61,7 +67,8 @@ public class World
         panel= new Image(RPG.ASSETS_PATH+"/panel.png");
         
         InitializeItems(items);
-        InitializeVillager(villagers);
+        InitializeVillagers(villagers);
+        InitializeMonsters(monsters);
         
     }
     
@@ -77,12 +84,27 @@ public class World
      * @param dir_y The player's movement in the y axis (-1, 0 or 1).
      * @param delta Time passed since last frame (milliseconds).
      */
-    public void update(int dir_x, int dir_y, int delta, boolean talk)
+    public void update(int dir_x, int dir_y, int delta, boolean talk, boolean attack)
     throws SlickException
     {
         player.move(this, dir_x, dir_y, delta,talk);
         camera.update();
         
+
+        for(Villager villager: villagers){
+        	villager.DialogueTime(delta);
+        }
+        for(Monster monster: monsters){
+        	monster.update(attack,delta, player, this);
+        	player.combat(monster, attack, delta,player,this);
+        	/*if (monster.getHp()<0){
+        		monsters.remove(monster);
+        		break;
+        	}*/
+        	
+        }
+        
+
 
         
     }
@@ -109,26 +131,27 @@ public class World
         g.translate(-camera.getMinX(), -camera.getMinY());
         
         for (Item item: items){
-        	if (items!=null){
 	        	item.PickUp(player);
 	        	item.render();
-        	}
-        	if (item.isPickup()){
-        		player.Inventory(item);
-        		items.remove(item);
-        		break;
-        	}
+	        	
+	        	if (item.isPickup()){
+	        		player.Inventory(item);
+	        		items.remove(item);
+	        		break;
+	        	}
+        	
         }
         for(Villager villager: villagers){
         	villager.render(g);
-        	if (villager.distanceOK(player.getX(),player.getY(),villager.getxPos(),villager.getyPos())&&player.getTalk()){
-        		villager.interact(player, this, g);
-        	}
+        	villager.interact(player, this, g);
+        	
+        }
+        
+        for(Monster monster: monsters){
+        	monster.render(g);
         }
         
         
-        
-        //amulet.renderAmulet(player);
 
         // Render the player
         player.render();
@@ -250,7 +273,7 @@ public class World
 
     }
     
-    private void InitializeVillager(ArrayList<Villager> villagers)
+    private void InitializeVillagers(ArrayList<Villager> villagers)
     throws SlickException
     {
     	villagers.add(new Prince());
@@ -258,5 +281,78 @@ public class World
     	villagers.add(new Farmer());
     }
     
+    
+    private void InitializeMonsters(ArrayList<Monster> monsters)
+    throws SlickException
+    {
+    	monsters.add(new GiantBat(1431,864));
+    	monsters.add(new GiantBat(1154,1321));
+    	monsters.add(new GiantBat(807,2315));
+    	monsters.add(new GiantBat(833,2657));
+    	monsters.add(new GiantBat(1090,3200));
+    	monsters.add(new GiantBat(676,3187));
+    	monsters.add(new GiantBat(836,3966));
+    	monsters.add(new GiantBat(653,4367));
+    	monsters.add(new GiantBat(1343,2731));
+    	monsters.add(new GiantBat(1835,3017));
+    	monsters.add(new GiantBat(1054,5337));
+    	monsters.add(new GiantBat(801,5921));
+    	monsters.add(new GiantBat(560,6682));
+    	monsters.add(new GiantBat(1275,5696));
+    	monsters.add(new GiantBat(1671,5991));
+    	monsters.add(new GiantBat(2248,6298));
+    	monsters.add(new GiantBat(2952,6373));
+    	monsters.add(new GiantBat(3864,6695));
+    	monsters.add(new GiantBat(4554,6443));
+    	monsters.add(new GiantBat(4683,6228));
+    	monsters.add(new GiantBat(5312,6606));
+    	monsters.add(new GiantBat(5484,5946));
+    	monsters.add(new GiantBat(6371,5634));
+    	monsters.add(new GiantBat(5473,3544));
+    	monsters.add(new GiantBat(5944,3339));
+    	monsters.add(new GiantBat(6301,3414));
+    	monsters.add(new GiantBat(6388,1994));
+    	monsters.add(new GiantBat(6410,1584));
+    	monsters.add(new GiantBat(5314,274));
+    	monsters.add(new Zombie(681,3201));
+    	monsters.add(new Zombie(691,4360));
+    	monsters.add(new Zombie(2166,2650));
+    	monsters.add(new Zombie(2122,2725));
+    	monsters.add(new Zombie(2284,2962));
+    	monsters.add(new Zombie(2072,4515));
+    	monsters.add(new Zombie(2006,4568));
+    	monsters.add(new Zombie(2385,4629));
+    	monsters.add(new Zombie(2446,4590));
+    	monsters.add(new Zombie(2517,4532));
+    	monsters.add(new Zombie(4157,6730));
+    	monsters.add(new Zombie(4247,6620));
+    	monsters.add(new Zombie(4137,6519));
+    	monsters.add(new Zombie(4234,6449));
+    	monsters.add(new Zombie(5879,4994));
+    	monsters.add(new Zombie(5954,4928));
+    	monsters.add(new Zombie(6016,4866));
+    	monsters.add(new Zombie(5860,4277));
+    	monsters.add(new Zombie(5772,4277));
+    	monsters.add(new Zombie(5715,4277));
+    	monsters.add(new Zombie(5653,4277));
+    	monsters.add(new Zombie(5787,797));
+    	monsters.add(new Zombie(5668,720));
+    	monsters.add(new Zombie(5813,454));
+    	monsters.add(new Zombie(5236,917));
+    	monsters.add(new Zombie(5048,1062));
+    	monsters.add(new Zombie(4845,996));
+    	monsters.add(new Zombie(4496,575));
+    	monsters.add(new Zombie(3457,273));
+    	monsters.add(new Zombie(3506,779));
+    	monsters.add(new Zombie(3624,1192));
+    	monsters.add(new Zombie(2931,1396));
+    	monsters.add(new Zombie(2715,1326));
+    	monsters.add(new Zombie(2442,1374));
+    	monsters.add(new Zombie(2579,1159));
+    	monsters.add(new Zombie(2799,1269));
+    	monsters.add(new Zombie(2768,739));
+    	monsters.add(new Zombie(2099,956));
+    	
+    }
     
 }

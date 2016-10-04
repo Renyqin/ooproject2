@@ -6,6 +6,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -23,8 +24,9 @@ public class Player extends Unit
     private boolean face_left = false;
 
     // Pixels per millisecond
-    private static final double SPEED = 0.7;
-    private static int MaxHp=100, MaxDamage=26, Rate=600, Hp=100;
+    private static final double SPEED = 0.25;
+    private static int MaxHp=100, MaxDamage=26, Rate=600;
+    private static int distance=50;
     private boolean talk;
     private ArrayList<Item> inventory = new ArrayList<Item>();
     
@@ -49,7 +51,7 @@ public class Player extends Unit
     public Player(String image_path, double x, double y)
         throws SlickException
     {
-    	super(MaxHp,MaxDamage,Rate,Hp);
+    	super(MaxHp,MaxDamage,Rate);
         img = new Image(image_path);
         img_flipped = img.getFlippedCopy(true, false);
         this.x = x;
@@ -101,6 +103,7 @@ public class Player extends Unit
                 && !world.terrainBlocks(this.x - width / 3, new_y + y_sign * height / 3)){
             this.y = new_y;
         }
+        
         
    
     }
@@ -155,6 +158,28 @@ public class Player extends Unit
         
         which_img = this.face_left ? this.img_flipped : this.img;
         which_img.drawCentered((int) x, (int) y);
+    }
+    
+    public void combat(Monster monster, boolean attack, int delta, Player player, World world){
+    	Random rDamage=new Random();
+		int randomDamage=(rDamage.nextInt(MaxDamage+1));
+    	
+  
+    	
+    	if (distanceOK(monster.getxPos(),monster.getyPos(),x,y)&&attack&&cooldown(delta)){
+    		
+    		monster.setHp(monster.getHp()-randomDamage);
+    		
+    		if (monster.getType()=="passive"){
+    			monster.setDangerDetector(0);
+    			
+    		}
+    		//System.out.println("1"+"\n"+MaxDamage+"\n"+cooldown);
+    	}
+    	if (attack&&getCooldown()>Rate){
+    		setCooldown(0);
+    		
+    	}
     }
 
 }

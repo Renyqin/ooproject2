@@ -1,0 +1,18 @@
+
+public class Monster extends Unit{
+	private final static int MaxHp;
+	
+	
+	
+	Monster(int xPos, intyPos) {
+		super(MaxHp, MaxDamage, rate, Hp);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void render(){
+		
+		
+	}
+	
+
+}

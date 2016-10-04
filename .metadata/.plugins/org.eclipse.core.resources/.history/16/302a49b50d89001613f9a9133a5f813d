@@ -1,0 +1,50 @@
+import java.util.Random;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class Monster extends Unit{
+	private Image MonsterImage;
+	private String type;
+	private static final double PSPEED=0.2;
+	Random random=new Random();
+	
+	public Monster(int MaxHp, int MaxDamage, int rate,String name, 
+			int xPos, int yPos, String ImagePath, String type) 
+	throws SlickException 
+	{
+		super(MaxHp, MaxDamage, rate, name, xPos, yPos);
+		MonsterImage=new Image(ImagePath);
+		this.type=type;
+	}
+
+
+
+
+	public String getType() {
+		return type;
+	}
+	
+	public void render(){
+		MonsterImage.drawCentered(getxPos(), getyPos());
+		
+	}
+	
+	public void wander(double delta){
+		int randomX=(random.nextInt(65536)-32768);
+		int randomY=(random.nextInt(65536)-32768);
+		double x=Math.signum(randomX);
+		double y=Math.signum(randomY);
+		
+		
+		
+		setxPos((int)(getxPos()+x*delta*PSPEED));
+		setyPos((int)(getxPos()+x*delta*PSPEED));
+		
+		
+	}
+	
+	
+	
+
+}

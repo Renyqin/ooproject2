@@ -97,3 +97,95 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.core.net 1 0 2016-10-01 13:34:44.215
 !MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.676
+!MESSAGE Cannot parse XML at URL http://marketplace.eclipse.org/category/free-tagging/fileExtension_png/api/p?client=org.eclipse.epp.mpc.core&client.version=1.5.0.v20160608-1457&os=macosx&ws=cocoa&nl=en_US&java.version=1.8.0_102&product=org.eclipse.epp.package.java.product&product.version=4.6.0.I20160606-1100&runtime.version=3.12.0.v20160606-1342&platform.version=4.6.0.v20160606-1100: Unexpected response content: Parse result is null.
+!STACK 1
+org.eclipse.epp.mpc.core.service.UnmarshalException: Unexpected response content: Parse result is null.
+	at org.eclipse.epp.internal.mpc.core.service.MarketplaceUnmarshaller.unmarshal(MarketplaceUnmarshaller.java:73)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:141)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:101)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:88)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.processSearchRequest(DefaultMarketplaceService.java:396)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.tagged(DefaultMarketplaceService.java:421)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.tagged(DefaultMarketplaceService.java:1)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService$2.doSearch(CachingMarketplaceService.java:234)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService.performSearch(CachingMarketplaceService.java:249)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService.tagged(CachingMarketplaceService.java:231)
+	at org.eclipse.epp.internal.mpc.ui.AskMarketPlaceForFileSupportStrategy$1.run(AskMarketPlaceForFileSupportStrategy.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Received response begins with:
+
+1: 
+2: <html>
+3: <head>
+
+!SUBENTRY 1 org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.679
+!MESSAGE Unexpected response content: Parse result is null.
+!SUBENTRY 2 org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.679
+!MESSAGE Received response begins with:
+
+1: 
+2: <html>
+3: <head>
+
+!SUBENTRY 1 org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.679
+!MESSAGE Unexpected response content: Parse result is null.
+!SUBENTRY 2 org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.679
+!MESSAGE Received response begins with:
+
+1: 
+2: <html>
+3: <head>
+
+
+!ENTRY org.eclipse.epp.mpc.ui 4 0 2016-10-02 23:59:14.697
+!MESSAGE Cannot complete request to http://marketplace.eclipse.org/category/free-tagging/fileExtension_png/api/p?client=org.eclipse.epp.mpc.core&client.version=1.5.0.v20160608-1457&os=macosx&ws=cocoa&nl=en_US&java.version=1.8.0_102&product=org.eclipse.epp.package.java.product&product.version=4.6.0.I20160606-1100&runtime.version=3.12.0.v20160606-1342&platform.version=4.6.0.v20160606-1100: Unexpected response content: Parse result is null.
+!STACK 1
+org.eclipse.core.runtime.CoreException: Cannot complete request to http://marketplace.eclipse.org/category/free-tagging/fileExtension_png/api/p?client=org.eclipse.epp.mpc.core&client.version=1.5.0.v20160608-1457&os=macosx&ws=cocoa&nl=en_US&java.version=1.8.0_102&product=org.eclipse.epp.package.java.product&product.version=4.6.0.I20160606-1100&runtime.version=3.12.0.v20160606-1342&platform.version=4.6.0.v20160606-1100: Unexpected response content: Parse result is null.
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:171)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:101)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:88)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.processSearchRequest(DefaultMarketplaceService.java:396)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.tagged(DefaultMarketplaceService.java:421)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.tagged(DefaultMarketplaceService.java:1)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService$2.doSearch(CachingMarketplaceService.java:234)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService.performSearch(CachingMarketplaceService.java:249)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService.tagged(CachingMarketplaceService.java:231)
+	at org.eclipse.epp.internal.mpc.ui.AskMarketPlaceForFileSupportStrategy$1.run(AskMarketPlaceForFileSupportStrategy.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.eclipse.epp.mpc.core.service.UnmarshalException: Unexpected response content: Parse result is null.
+	at org.eclipse.epp.internal.mpc.core.service.MarketplaceUnmarshaller.unmarshal(MarketplaceUnmarshaller.java:73)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:141)
+	... 10 more
+!SUBENTRY 1 org.eclipse.epp.mpc.core 4 0 2016-10-02 23:59:14.697
+!MESSAGE Cannot complete request to http://marketplace.eclipse.org/category/free-tagging/fileExtension_png/api/p?client=org.eclipse.epp.mpc.core&client.version=1.5.0.v20160608-1457&os=macosx&ws=cocoa&nl=en_US&java.version=1.8.0_102&product=org.eclipse.epp.package.java.product&product.version=4.6.0.I20160606-1100&runtime.version=3.12.0.v20160606-1342&platform.version=4.6.0.v20160606-1100: Unexpected response content: Parse result is null.
+!STACK 1
+org.eclipse.epp.mpc.core.service.UnmarshalException: Unexpected response content: Parse result is null.
+	at org.eclipse.epp.internal.mpc.core.service.MarketplaceUnmarshaller.unmarshal(MarketplaceUnmarshaller.java:73)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:141)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:101)
+	at org.eclipse.epp.internal.mpc.core.service.RemoteMarketplaceService.processRequest(RemoteMarketplaceService.java:88)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.processSearchRequest(DefaultMarketplaceService.java:396)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.tagged(DefaultMarketplaceService.java:421)
+	at org.eclipse.epp.internal.mpc.core.service.DefaultMarketplaceService.tagged(DefaultMarketplaceService.java:1)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService$2.doSearch(CachingMarketplaceService.java:234)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService.performSearch(CachingMarketplaceService.java:249)
+	at org.eclipse.epp.internal.mpc.core.service.CachingMarketplaceService.tagged(CachingMarketplaceService.java:231)
+	at org.eclipse.epp.internal.mpc.ui.AskMarketPlaceForFileSupportStrategy$1.run(AskMarketPlaceForFileSupportStrategy.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Received response begins with:
+
+1: 
+2: <html>
+3: <head>
+
+!SUBENTRY 2 org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.697
+!MESSAGE Unexpected response content: Parse result is null.
+!SUBENTRY 3 org.eclipse.epp.mpc.core 1 0 2016-10-02 23:59:14.697
+!MESSAGE Received response begins with:
+
+1: 
+2: <html>
+3: <head>
+
