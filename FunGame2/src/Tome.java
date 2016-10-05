@@ -1,7 +1,7 @@
 import org.newdawn.slick.SlickException;
 
 public class Tome extends Item {
-	private final static int xPos=800, yPos=800;
+	private final static int xPos=4791, yPos=1253;
 	private final static  String path="assets/items/tome.png";
 	private final static int rateImprove=300;
 	boolean pickup=false;

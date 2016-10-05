@@ -26,9 +26,11 @@ public class Player extends Unit
     // Pixels per millisecond
     private static final double SPEED = 0.25;
     private static int MaxHp=100, MaxDamage=26, Rate=600;
-    private static int distance=50;
     private boolean talk;
     private ArrayList<Item> inventory = new ArrayList<Item>();
+    private static final int feeler=3;
+    
+    private int reviveX=738, reviveY=549;
     
     
     /** The x coordinate of the player (pixels). */
@@ -92,16 +94,22 @@ public class Player extends Unit
         // Move in x first
         double x_sign = Math.signum(dir_x);
  
-        if(!world.terrainBlocks(new_x + x_sign * width / 3, this.y + height / 3) 
-                && !world.terrainBlocks(new_x + x_sign * width / 3, this.y - height / 3)) {
+        if(!world.terrainBlocks(new_x + x_sign * width / feeler, this.y + height / feeler) 
+                && !world.terrainBlocks(new_x + x_sign * width / feeler, this.y - height / feeler)) {
             this.x = new_x;
         }
         
         // Then move in y
         double y_sign = Math.signum(dir_y);
-        if(!world.terrainBlocks(this.x + width / 3, new_y + y_sign * height / 3) 
-                && !world.terrainBlocks(this.x - width / 3, new_y + y_sign * height / 3)){
+        if(!world.terrainBlocks(this.x + width / feeler, new_y + y_sign * height / feeler) 
+                && !world.terrainBlocks(this.x - width / feeler, new_y + y_sign * height / feeler)){
             this.y = new_y;
+        }
+        
+        if (getHp()<0){
+        	this.x = reviveX;
+        	this.y = reviveY;
+        	setHp(getMaxHp());
         }
         
         
@@ -174,10 +182,10 @@ public class Player extends Unit
     			monster.setDangerDetector(0);
     			
     		}
-    		//System.out.println("1"+"\n"+MaxDamage+"\n"+cooldown);
+    	
     	}
-    	if (attack&&getCooldown()>Rate){
-    		setCooldown(0);
+    	if (attack&&getCooldown()<0){
+    		setCooldown(Rate);
     		
     	}
     }

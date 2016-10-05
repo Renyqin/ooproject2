@@ -53,7 +53,7 @@ public class World
     }
     
 
-    public ArrayList<Monster> getMonsters() {
+	public ArrayList<Monster> getMonsters() {
 		return monsters;
 	}
 
@@ -95,12 +95,12 @@ public class World
         	villager.DialogueTime(delta);
         }
         for(Monster monster: monsters){
-        	monster.update(attack,delta, player, this);
+        	monster.update(attack,delta, player, this, dir_x, dir_y);
         	player.combat(monster, attack, delta,player,this);
-        	/*if (monster.getHp()<0){
+        	if (monster.getHp()<0){
         		monsters.remove(monster);
         		break;
-        	}*/
+        	}
         	
         }
         
@@ -215,7 +215,7 @@ public class World
         bar_y = RPG.screenheight - RPG.panelheight + 20;
         bar_width = 90;
         bar_height = 30;
-        health_percent = player.getHp()/player.getMaxHp();                         // TODO: HP / Max-HP
+        health_percent = (float)player.getHp()/player.getMaxHp();                         // TODO: HP / Max-HP
         hp_bar_width = (int) (bar_width * health_percent);
         text_x = bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         g.setColor(BAR_BG);
@@ -352,6 +352,71 @@ public class World
     	monsters.add(new Zombie(2799,1269));
     	monsters.add(new Zombie(2768,739));
     	monsters.add(new Zombie(2099,956));
+    	
+
+    	monsters.add(new Bandit(1889,2581));
+    	monsters.add(new Bandit(4502,6283));
+    	monsters.add(new Bandit(5248,6581));
+    	monsters.add(new Bandit(5345,6678));
+    	monsters.add(new Bandit(5940,3412));
+    	monsters.add(new Bandit(6335,3459));
+    	monsters.add(new Bandit(6669,260));
+    	monsters.add(new Bandit(6598,339));
+    	monsters.add(new Bandit(6598,528));
+    	monsters.add(new Bandit(6435,528));
+    	monsters.add(new Bandit(6435,678));
+    	monsters.add(new Bandit(5076,1082));
+    	monsters.add(new Bandit(5191,1187));
+    	monsters.add(new Bandit(4940,1175));
+    	monsters.add(new Bandit(4760,1039));
+    	monsters.add(new Bandit(4883,889));
+    	monsters.add(new Bandit(4427,553));
+    	monsters.add(new Bandit(3559,162));
+    	monsters.add(new Bandit(3779,1553));
+    	monsters.add(new Bandit(3573,1553));
+    	monsters.add(new Bandit(3534,2464));
+    	monsters.add(new Bandit(3635,2464));
+    	monsters.add(new Bandit(3402,2861));
+    	monsters.add(new Bandit(3151,2857));
+    	monsters.add(new Bandit(3005,2997));
+    	monsters.add(new Bandit(2763,2263));
+    	monsters.add(new Bandit(2648,2263));
+    	monsters.add(new Bandit(2621,1337));
+    	monsters.add(new Bandit(2907,1270));
+    	monsters.add(new Bandit(2331,598));
+    	monsters.add(new Bandit(2987,394));
+    	monsters.add(new Bandit(1979,394));
+    	monsters.add(new Bandit(2045,693));
+    	monsters.add(new Bandit(2069,1028));
+    	
+    	monsters.add(new Skeleton(1255,2924));
+    	monsters.add(new Skeleton(2545,4708));
+    	monsters.add(new Skeleton(4189,6585));
+    	monsters.add(new Skeleton(5720,622));
+    	monsters.add(new Skeleton(5649,767));
+    	monsters.add(new Skeleton(5291,312));
+    	monsters.add(new Skeleton(5256,852));
+    	monsters.add(new Skeleton(4790,976));
+    	monsters.add(new Skeleton(4648,401));
+    	monsters.add(new Skeleton(3628,1181));
+    	monsters.add(new Skeleton(3771,1181));
+    	monsters.add(new Skeleton(3182,2892));
+    	monsters.add(new Skeleton(3116,3033));
+    	monsters.add(new Skeleton(2803,2901));
+    	monsters.add(new Skeleton(2850,2426));
+    	monsters.add(new Skeleton(2005,1524));
+    	monsters.add(new Skeleton(2132,1427));
+    	monsters.add(new Skeleton(2242,1343));
+    	monsters.add(new Skeleton(2428,771));
+    	monsters.add(new Skeleton(2427,907));
+    	monsters.add(new Skeleton(2770,613));
+    	monsters.add(new Skeleton(2915,477));
+    	monsters.add(new Skeleton(1970,553));
+    	monsters.add(new Skeleton(2143,1048));
+
+    	monsters.add(new Draelic(2069,510));
+    	
+    	
     	
     }
     

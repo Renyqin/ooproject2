@@ -1,7 +1,7 @@
 import org.newdawn.slick.SlickException;
 
 public class Elixir extends Item {
-	private final static int xPos=700, yPos=700;
+	private final static int xPos=1976, yPos=402;
 	private final static  String path="assets/items/elixir.png";
 	boolean pickup=false;
 	

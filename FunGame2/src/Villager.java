@@ -7,7 +7,7 @@ public abstract class Villager extends Unit {
 	private Image VillagerImage;
 	private int timer=4000;
 	private int dialogueTime=4000;
-	private int distance=50;
+	private int tile=72;
 
 	
 	public Villager(int MaxHp,int xPos, int yPos, String ImagePath,String name)
@@ -49,11 +49,15 @@ public abstract class Villager extends Unit {
         Color TEXT = new Color(1.0f, 1.0f, 1.0f);          // White
         Color BAR_BG = new Color(0.0f, 0.0f, 0.0f, 0.8f);   // Black, transp
         
-        int bar_x = xPos-g.getFont().getWidth(text)/2;  // TODO: magic number
-        int bar_y = yPos-72/2-40;    // TODO: MAGIC NUMBER
-        int bar_width = g.getFont().getWidth(text)+10;
+        /*2 is for central the bar above villagers head*/
+        int bar_x = xPos-g.getFont().getWidth(text)/2;  
+        int bar_y = yPos-tile;  
+        
+        /*the perfect bar_width match to text is the length of text+6 from spec*/
+        int bar_width = g.getFont().getWidth(text)+6; 
         int bar_height = g.getFont().getHeight(text);
         
+        /*put the text inside the bar*/
         int text_x=bar_x + (bar_width - g.getFont().getWidth(text)) / 2;
         int text_y=bar_y;
         

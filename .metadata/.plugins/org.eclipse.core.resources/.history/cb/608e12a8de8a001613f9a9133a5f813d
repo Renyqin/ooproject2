@@ -1,0 +1,15 @@
+import org.newdawn.slick.SlickException;
+
+public class Skeleton extends Monster{
+	private static final int MaxHp=60, MaxDamage=10,rate=800;
+	private static final String name="Skeleton", type="aggressive";
+	private static final String ImagePath="assets/units/skeleton.png";
+
+	public Skeleton(int xPos, int yPos) 
+	throws SlickException 
+	{
+		super(MaxHp, MaxDamage, rate, name, xPos, yPos, ImagePath, type);
+		
+	}
+
+}

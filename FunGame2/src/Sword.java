@@ -1,7 +1,7 @@
 import org.newdawn.slick.SlickException;
 
 public class Sword extends Item{
-	private final static int xPos=600, yPos=600;
+	private final static int xPos=546, yPos=6706;
 	private final static  String path="assets/items/sword.png";
 	private final static int damageImprove=30;
 	boolean pickup=false;

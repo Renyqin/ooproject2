@@ -1,0 +1,14 @@
+import org.newdawn.slick.SlickException;
+
+public class Bandit extends Monster{
+	private static final int MaxHp=60, MaxDamage=10,rate=800;
+	private static final String name="Bandit", type="aggressive";
+	private static final String ImagePath="assets/units/bandit.png";
+
+	public Bandit(int xPos, int yPos) 
+	throws SlickException 
+	{
+		super(MaxHp, MaxDamage, rate, name, xPos, yPos, ImagePath, type);
+		
+	}
+}

@@ -2,7 +2,7 @@
 import org.newdawn.slick.SlickException;
 
 public class Amulet extends Item{
-	private final static int xPos=500, yPos=500;
+	private final static int xPos=965, yPos=3563;
 	private final static  String path="assets/items/amulet.png";
 	private final static int HpImprove=80;
 	
